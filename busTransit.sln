@@ -1,0 +1,17 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "busTransit", "busTransit\busTransit.csproj", "{FBFC7087-28FF-4DA3-8EF0-0C6F707C843E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|anycpu = Debug|anycpu
+		Release|anycpu = Release|anycpu
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FBFC7087-28FF-4DA3-8EF0-0C6F707C843E}.Debug|anycpu.ActiveCfg = Debug|anycpu
+		{FBFC7087-28FF-4DA3-8EF0-0C6F707C843E}.Debug|anycpu.Build.0 = Debug|anycpu
+		{FBFC7087-28FF-4DA3-8EF0-0C6F707C843E}.Release|anycpu.ActiveCfg = Release|anycpu
+		{FBFC7087-28FF-4DA3-8EF0-0C6F707C843E}.Release|anycpu.Build.0 = Release|anycpu
+	EndGlobalSection
+EndGlobal

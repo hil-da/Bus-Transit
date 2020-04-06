@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 
 namespace busTransit
 {
@@ -44,7 +43,6 @@ namespace busTransit
             string name = null;
             string occupation = null;
 
-
             if (!isFull)
             {
                 Console.WriteLine("------Registration-------");
@@ -81,7 +79,6 @@ namespace busTransit
                     else
                         Console.WriteLine("Error: Invalid age, try again.");
                 }
-
 
                 Console.WriteLine("Your gender: ");
                 Console.WriteLine(" [F]emale");
@@ -192,16 +189,25 @@ namespace busTransit
         {
             Console.Clear();
             Console.WriteLine("---Passengers onboard----");
+            int countF = 0;
+            int countM = 0;
 
             foreach (Passenger person in passengers)
             {
                 if (person != null)
                 {
-                    var countF = person.getGender().Count(x => x == 'F');
-                    var countM = person.getGender().Count(x => x == 'M');
-                    Console.WriteLine(countF);
+                    if (person.getGender() == "Female")
+                    {
+                        countF++;
+                    }
+                    else
+                    {
+                        countM++;
+                    }
                 }
             }
+
+            Console.Write("Females: {0} | Males: {1}", countF, countM);
 
             Console.ReadKey();
             Console.Write("Press any key to return to the menu . . . ");
@@ -318,23 +324,91 @@ namespace busTransit
                     sortAgeAscending();
                     break;
                 case "D":
+                    sortAgeDecending();
                     break;
                 case "d":
+                    sortAgeDecending();
                     break;
             }
         }
 
         public void sortAgeAscending()
         {
+            Console.Clear();
             Console.WriteLine("---------Sort Age--------");
 
+            Passenger[] sortedListA = new Passenger[passengers.Length];
+            int index = 0;
 
+            foreach (Passenger unsortedPassenger in passengers)
+            {
+                sortedListA[index] = unsortedPassenger;
+                index++;
+            }
+
+            for (int i = 0; i < sortedListA.Length; i++)
+                for (int j = 1; j < sortedListA.Length - 1; j++)
+                {
+                    if (sortedListA[i] != null && sortedListA[j] != null)
+                    {
+                        if (sortedListA[j].getAge() < sortedListA[j - 1].getAge())
+                        {
+                            Passenger exPerson = sortedListA[j - 1];
+                            sortedListA[j - 1] = sortedListA[j];
+                            sortedListA[j] = exPerson;
+                        }
+                    }
+                }
+            foreach (Passenger age in sortedListA)
+            {
+                if (age != null)
+                {
+                    Console.Write("{0}, ", age.getAge());
+
+                }
+            }
+            Console.ReadKey();
         }
 
         public void sortAgeDecending()
         {
+            Console.Clear();
+            Console.WriteLine("---------Sort Age--------");
 
+            Passenger[] sortedListD = new Passenger[passengers.Length];
+            int index = 0;
+
+            foreach (Passenger unsortedPassenger in passengers)
+            {
+                sortedListD[index] = unsortedPassenger;
+                index++;
+            }
+
+            for (int i = 0; i < sortedListD.Length; i++)
+                for (int j = 1; j < sortedListD.Length - 1; j++)
+                {
+                    if (sortedListD[i] != null && sortedListD[j] != null)
+                    {
+                        if (sortedListD[j].getAge() > sortedListD[j - 1].getAge())
+                        {
+                            Passenger exPerson = sortedListD[j];
+                            sortedListD[j] = sortedListD[j - 1];
+                            sortedListD[j - 1] = exPerson;
+                        }
+                    }
+                }
+            foreach (Passenger age in sortedListD)
+            {
+                if (age != null)
+                {
+                    Console.Write("{0}, ", age.getAge());
+
+                }
+            }
+            Console.ReadKey();
         }
+
+    
 
         public void sortNameAlpha()
         {

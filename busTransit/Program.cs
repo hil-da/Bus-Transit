@@ -2,21 +2,24 @@
 
 namespace busTransit
 {
-    public class Passenger
+    // Creating a constructor
+    public class Passenger 
     {
         public string getName() { return name; }
         public string getSurname() { return surname; }
         public string getGender() { return gender; }
         public int getAge() { return age; }
         public string getOccupation() { return occupation; }
-
+        
+        // Private variables
         int age;
         string name;
         string surname;
         string gender;
         string occupation;
 
-        public Passenger(string Name, string Surname, string Gender, string Occupation, int Age) //the basic recipe for one passenger
+        // Creating the basic recipe for one passenger
+        public Passenger(string Name, string Surname, string Gender, string Occupation, int Age) 
         {
             name = Name;
             surname = Surname;
@@ -25,48 +28,53 @@ namespace busTransit
             occupation = Occupation;
         }
     }
-
-    class Buss // creating a class for bus
+    class Buss 
     {
-        public Passenger[] passengers = new Passenger[25]; // this bus only fits 25 passengers
-        int passengerCount = 0; // initial count is zero passengers
+        // Creating an array which only fits 25 passengers
+        public Passenger[] passengers = new Passenger[25]; 
+        
+        // Initial count is zero passengers
+        int passengerCount = 0; 
 
         //------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        public void addPassenger() // adding passenger
+        // Registering a new passenger
+        public void addPassenger() 
         {
-            bool isFull = passengerCount == passengers.Length ? true : false; // creating a ternary operator 
-            Console.Clear(); // clears all data above
-            int age = 0; // age is set to zero
-            string gender = null; // setting these to null (null refers to unassigned value)
+            // Creating a ternary operator which checks if the bus is full
+            bool isFull = passengerCount == passengers.Length ? true : false; 
+            
+            // Clears all data above
+            Console.Clear(); 
+            int age = 0; 
+            string gender = null; 
             string sname = null;
             string name = null;
             string occupation = null;
 
-            if (!isFull)
+            // The code will run while the passengerCount is below 25
+            if (!isFull) 
             {
                 Console.WriteLine("------Registration-------");
 
                 Console.Write("Your name: ");
-                while (name == null) // creating a while loop 
+                
+                // Creating a while loop where the rest of the code can occur if the position in the array == null
+                while (name == null) 
                 {
-                    string input = Console.ReadLine(); // user input gets assigned to a string 
-                    if (!Int32.TryParse(input, out int useless)) // checks if user input is a string aka letters and not numbers
-                    {
-                        name = input; // if the statement is true, 
-                    }
+                    string input = Console.ReadLine(); 
+                    if (!Int32.TryParse(input, out int useless)) 
+                        name = input; 
                     else
-                        Console.WriteLine("Error: Invalid characters, try again.");
+                        Console.WriteLine("Error: Invalid characters, try again."); 
                 }
 
-                Console.Write("Your surname: ");
+                Console.Write("Your surname: "); 
                 while (sname == null)
                 {
                     string input = Console.ReadLine();
                     if (!Int32.TryParse(input, out int useless))
-                    {
                         sname = input;
-                    }
                     else
                         Console.WriteLine("Error: Invalid characters, try again.");
                 }
@@ -74,8 +82,9 @@ namespace busTransit
                 Console.Write("Your Age: ");
                 while (age == 0)
                 {
-                    if (Int32.TryParse(Console.ReadLine(), out int tempAge) && tempAge > 0 && tempAge < 100)
-                        age = tempAge;
+                    // Checks if the input is between 1-99 and that the input isn't a string
+                    if (Int32.TryParse(Console.ReadLine(), out int tempAge) && tempAge > 0 && tempAge < 100) 
+                        age = tempAge; 
                     else
                         Console.WriteLine("Error: Invalid age, try again.");
                 }
@@ -86,7 +95,7 @@ namespace busTransit
 
                 while (gender == null)
                 {
-                    switch (Console.ReadLine())
+                    switch (Console.ReadLine())  
                     {
                         case "F":
                             gender = "Female";
@@ -110,33 +119,33 @@ namespace busTransit
                 while (occupation == null)
                 {
                     string input = Console.ReadLine();
-                    if (!Int32.TryParse(input, out int useless))
-                    {
+                    if (!Int32.TryParse(input, out int useless)) 
                         occupation = input;
-                    }
                     else
                         Console.WriteLine("Error: Invalid characters, try again.");
                 }
-
-                Passenger newPassenger = new Passenger(name, sname, gender, occupation, age);
+                
+                // Creating an instance of the type passenger
+                Passenger newPassenger = new Passenger(name, sname, gender, occupation, age); 
 
                 for (int i = 0; i < passengers.Length; i++)
                 {
                     if (passengerCount != passengers.Length && passengers[i] == null)
                     {
-                        passengers[i] = newPassenger;
-                        passengerCount++;
+                        passengers[i] = newPassenger; 
+                        
+                        // The passenger count gets increased by one
+                        passengerCount++; 
                         break;
                     }
                 }
-
                 Console.WriteLine("\nRegistration: Successful! Here's the info given: ");
-                Console.WriteLine(name + " | " + sname + " | " + age + " | " + gender + " | " + occupation);
+                
+                // Printing out the passengers
+                Console.WriteLine(name + " | " + sname + " | " + age + " | " + gender + " | " + occupation); 
             }
             else
-            {
-                Console.Write("The bus is full, take the next one!");
-            }
+                Console.Write("The bus is full, take the next one!"); 
 
             Console.ReadKey();
             Console.Write("Press any key to return to the menu . . . ");
@@ -165,7 +174,12 @@ namespace busTransit
                 case "g":
                     printGender();
                     break;
+                default:
+                    Console.WriteLine("Error: Invalid characters, try again.");
+                    break;
             }
+            Console.ReadKey();
+            Console.Write("Press any key to return to the menu . . . ");
         }
 
         public void printBus()
@@ -173,12 +187,15 @@ namespace busTransit
             Console.Clear();
             Console.WriteLine("---Passengers onboard----");
 
-            foreach (Passenger person in passengers)
+            // Prints out all passengers
+            foreach (Passenger person in passengers) 
             {
                 if (person != null)
-                    Console.WriteLine(person.getName() + " | " + person.getSurname() + " | " + person.getGender() + " | " + person.getAge());
+                    Console.WriteLine(person.getName() + " | " + person.getSurname() + " | " + person.getGender() + " | " + person.getAge() + " | " + person.getOccupation());
             }
-            if (passengerCount <= 0)
+
+            // If there are no passengers onboard
+            if (passengerCount <= 0) 
                 Console.WriteLine("The bus is empty!");
 
             Console.ReadKey();
@@ -189,32 +206,37 @@ namespace busTransit
         {
             Console.Clear();
             Console.WriteLine("---Passengers onboard----");
-            int countF = 0;
-            int countM = 0;
+            int countF = 0; // Counts female passengers
+            int countM = 0; // Counts male passengers
 
             foreach (Passenger person in passengers)
             {
-                if (person != null)
+                if (person != null) 
                 {
-                    if (person.getGender() == "Female")
+                    if (person.getGender() == "Female") 
                     {
-                        countF++;
+                        countF++; 
+                       
+                        // Prints out the position of the passenger
+                        Console.WriteLine("Female sitting in seat: {0} \n", Array.IndexOf(passengers, person) + 1); 
                     }
                     else
                     {
-                        countM++;
+                        countM++; 
+                        // Prints out the position of the passenger
+                        Console.WriteLine("Male sitting in seat: {0} \n", Array.IndexOf(passengers, person) + 1);
                     }
                 }
             }
-
-            Console.Write("Females: {0} | Males: {1}", countF, countM);
+            
+            // Printing out how many of each gender there are
+            Console.Write("Females: {0} | Males: {1}", countF, countM); 
 
             Console.ReadKey();
             Console.Write("Press any key to return to the menu . . . ");
         }
 
         //------------------------------------------------------------------------------------------------------------------------------------------------------------
-
         public void getCalculation()
         {
             Console.Clear();
@@ -236,7 +258,12 @@ namespace busTransit
                 case "t":
                     getTotalAge();
                     break;
+                default:
+                    Console.WriteLine("Error: Invalid characters, try again.");
+                    break;
             }
+            Console.ReadKey();
+            Console.Write("Press any key to return to the menu . . . ");
         }
 
         public void getAverageAge()
@@ -245,20 +272,29 @@ namespace busTransit
             Console.WriteLine("--------Calculate--------");
             Console.Write("Average age on the bus: ");
 
-            int ageCount = 0;
-            int tempCount = 0;
+            // Total age
+            int ageCount = 0; 
+            
+            // Passenger count 
+            int tempCount = 0; 
             foreach (Passenger person in passengers)
             {
                 if (person != null)
                 {
-                    ageCount += person.getAge();
-                    tempCount++;
+                    // Adds all the ages 
+                    ageCount += person.getAge(); 
+                    
+                    // Adds how many passengers there are
+                    tempCount++; 
                 }
             }
-            ageCount = ageCount / tempCount;
+            
+            // The total number of all ages divided by how many passengers there are onboard
+            ageCount = ageCount / tempCount; 
 
-            Console.Write(ageCount);
+            Console.Write(ageCount); 
             Console.ReadKey();
+            Console.Write("Press any key to return to the menu . . . ");
         }
 
         public void getTotalAge()
@@ -267,17 +303,18 @@ namespace busTransit
             Console.WriteLine("--------Calculate--------");
             Console.Write("Total age on the bus: ");
 
-            int ageCount = 0;
+            // Total age
+            int ageCount = 0; 
             foreach (Passenger person in passengers)
             {
                 if (person != null)
-                {
-                    ageCount += person.getAge();
-                }
+                    // Adds all the ages
+                    ageCount += person.getAge(); 
             }
 
-            Console.Write(ageCount);
+            Console.Write(ageCount); 
             Console.ReadKey();
+            Console.Write("Press any key to return to the menu . . . ");
         }
 
         //------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -289,21 +326,17 @@ namespace busTransit
             Console.WriteLine("What would you like to sort?");
 
             Console.WriteLine(" [A]ge");
-            Console.WriteLine(" [N]ame");
-
             switch (Console.ReadLine())
             {
-                case "A":
+                case "A": // Supports uppercase
+                    sortAge(); 
+                    break;
+                case "a": // Supports lowercase
                     sortAge();
-                    break;
-                case "a":
-                    sortAge();
-                    break;
-                case "N":
-                    break;
-                case "n":
                     break;
             }
+            Console.ReadKey();
+            Console.Write("Press any key to return to the menu . . . ");
         }
 
         public void sortAge()
@@ -311,7 +344,6 @@ namespace busTransit
             Console.Clear();
             Console.WriteLine("---------Sort Age--------");
             Console.WriteLine("How would you want to sort the age?");
-
             Console.WriteLine(" [A]scending order");
             Console.WriteLine(" [D]ecending order");
 
@@ -329,52 +361,60 @@ namespace busTransit
                 case "d":
                     sortAgeDecending();
                     break;
+                default:
+                    Console.WriteLine("Error: Invalid characters, try again.");
+                    break;
             }
+            Console.ReadKey();
+            Console.Write("Press any key to return to the menu . . . ");
         }
-
         public void sortAgeAscending()
         {
             Console.Clear();
             Console.WriteLine("---------Sort Age--------");
 
-            Passenger[] sortedListA = new Passenger[passengers.Length];
+            // Creating a new array for the sorted list
+            Passenger[] sortedListA = new Passenger[passengers.Length]; 
             int index = 0;
 
             foreach (Passenger unsortedPassenger in passengers)
             {
-                sortedListA[index] = unsortedPassenger;
+                // Puts all the passengers in a new array for sorting later
+                sortedListA[index] = unsortedPassenger; 
                 index++;
             }
 
             for (int i = 0; i < sortedListA.Length; i++)
                 for (int j = 1; j < sortedListA.Length - 1; j++)
                 {
-                    if (sortedListA[i] != null && sortedListA[j] != null)
+                    // Checks if the sorted- and unsorted list isn't equal to null
+                    if (sortedListA[i] != null && sortedListA[j] != null) 
                     {
                         if (sortedListA[j].getAge() < sortedListA[j - 1].getAge())
                         {
+                            // swaps the elements
                             Passenger exPerson = sortedListA[j - 1];
                             sortedListA[j - 1] = sortedListA[j];
                             sortedListA[j] = exPerson;
                         }
                     }
                 }
+
             foreach (Passenger age in sortedListA)
             {
                 if (age != null)
-                {
-                    Console.Write("{0}, ", age.getAge());
-
-                }
+                    Console.Write("{0}, ", age.getAge()); 
             }
+
             Console.ReadKey();
+            Console.Write("Press any key to return to the menu . . . ");
         }
 
-        public void sortAgeDecending()
+        public void sortAgeDecending() 
         {
             Console.Clear();
             Console.WriteLine("---------Sort Age--------");
-
+            
             Passenger[] sortedListD = new Passenger[passengers.Length];
             int index = 0;
 
@@ -396,28 +436,164 @@ namespace busTransit
                             sortedListD[j - 1] = exPerson;
                         }
                     }
-                }
+            }
+
             foreach (Passenger age in sortedListD)
             {
                 if (age != null)
                 {
                     Console.Write("{0}, ", age.getAge());
-
                 }
             }
+
             Console.ReadKey();
+            Console.Write("Press any key to return to the menu . . . ");
         }
 
-    
+        //------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        public void sortNameAlpha()
+        public void findPassenger()
         {
+            Console.Clear();
+            Console.WriteLine("-----Find Passengers-----");
 
+            int oAge = 0; // Oldest age
+            int yAge = 0; // Youngest age
+
+            if (passengerCount > 0)
+            {
+                Console.WriteLine("Whats the age range you're looking for? Begin by writing the highest age: ");
+                while (oAge == 0)
+                {
+                    if (Int32.TryParse(Console.ReadLine(), out int tempAge) && tempAge > 0 && tempAge < 100)
+                        oAge = tempAge;
+                    else
+                        Console.WriteLine("Error: Invalid age, try again.");
+                }
+
+                Console.WriteLine("\nAnd the lowest: ");
+                while (yAge == 0)
+                {
+                    if (Int32.TryParse(Console.ReadLine(), out int tempAge) && tempAge > 0 && tempAge < 100)
+                        yAge = tempAge;
+                    else
+                        Console.WriteLine("Error: Invalid age, try again.");
+                }
+
+                int minAge = Math.Min(oAge, yAge); // Compares the values and determines the lowest 
+                int maxAge = Math.Max(oAge, yAge); // Compares the values and determines the highest 
+
+                Console.WriteLine("\nThe passengers that fit into that age range are: {0} - {1}", minAge,
+                    maxAge); 
+
+                for (int i = 0; i < passengers.Length; i++)
+                {
+                    if (passengers[i] != null)
+                    {
+                        // Finds all the ages between the values given
+                        if (passengers[i].getAge() >= minAge && passengers[i].getAge() <= maxAge && passengers[i].getAge() != 0) 
+                            Console.WriteLine(passengers[i].getName() + " | " + passengers[i].getAge()); 
+                    }
+                }
+            }
+            else
+                Console.WriteLine("The bus is empty.");
+
+            Console.ReadKey();
+            Console.Write("Press any key to return to the menu . . . ");
         }
 
-        public void sortNameReverse()
-        {
+        //------------------------------------------------------------------------------------------------------------------------------------------------------------
+        // Did not get it to work, will come back to it later
 
+        //public void nudgePassenger()
+        //{
+        //    Console.Clear();
+        //    Console.WriteLine("-----Nudge Passenger-----");
+
+        //    string[] vPhrases = {
+        //        "Pleased to meet you.",
+        //        "God bless you.",
+        //        "Good evening love!"
+        //    };
+
+        //    string[] mPhrases = {
+        //        "Hello!",
+        //        "Hi",
+        //        "Can i help you with something?",
+        //        "Have a nice day!"
+        //    };
+
+        //    string[] yPhrases = {
+        //        "Back off!",
+        //        "What's crackin'?",
+        //        "Don't touch me, thanks.",
+        //        "Whazzup.",
+        //        "What’s new?",
+        //    };
+
+        //    Random rnd = new Random();
+        //    int pvIndex = rnd.Next(vPhrases.Length);
+        //    int pmIndex = rnd.Next(mPhrases.Length);
+        //    int pyIndex = rnd.Next(yPhrases.Length);
+
+        //    Console.WriteLine("Here's a list of all the passengers onboard:");
+
+        //    foreach (Passenger person in passengers)
+        //    {
+        //        if (person != null)
+        //            Console.WriteLine("" + person.getName() + " | " + person.getSurname() + " | " + person.getGender() + " | " + person.getAge());
+        //    }
+
+        //    Console.WriteLine("\nWho would you like to give a nudge?");
+        //    string pass = Console.ReadLine();
+
+        //    for (int i = 0; i < passengers.Length; i++)
+        //    {
+        //        if (passengers[i] != null)
+        //        {
+        //            if (passengers[i].getAge() > 90)
+        //            {
+        //                Console.WriteLine("\n{0}: {1}", pass, vPhrases[pvIndex]);
+        //            }
+        //            else if (passengers[i].getAge() < 20)
+        //            {
+        //                Console.WriteLine("\n{0}: {1}", pass, yPhrases[pyIndex]);
+        //            }
+        //            else
+        //            {
+        //                Console.WriteLine("\n{0}: {1}", pass, mPhrases[pmIndex]);
+        //            }
+        //        }      
+        //    }
+        //    Console.ReadKey();
+        //}
+
+        //------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        public void getOff()
+        {
+            Console.Clear();
+            Random rndPass = new Random();
+            
+            // Randomizes a passenger from the array
+            int index = rndPass.Next(passengerCount); 
+
+            if (passengerCount > 0 && passengers[index] != null)
+            {
+                // Prints out the removed passenger
+                Console.WriteLine(passengers[index].getName() + " got off the bus."); 
+                
+                // Removes the random passenger
+                Array.Clear(passengers, index, 1); 
+                
+                // reduces passengerCount by one
+                passengerCount--; 
+            }
+            else
+                Console.WriteLine("The bus is empty.");
+
+            Console.ReadKey();
         }
 
         //------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -425,7 +601,6 @@ namespace busTransit
         public void Run()
         {
             string choice;
-
             do
             {
                 Console.Clear();
@@ -433,10 +608,10 @@ namespace busTransit
                 Console.WriteLine(" [A]dd a new passenger");
                 Console.WriteLine(" [P]rint...");
                 Console.WriteLine(" [C]alculate...");
-                //Console.WriteLine(" [F]ind passenger by age");
+                Console.WriteLine(" [F]ind passenger by age");
                 Console.WriteLine(" [S]ort passengers");
                 //Console.WriteLine(" [N]udge passenger");
-                //Console.WriteLine(" [G]et off");
+                Console.WriteLine(" [G]et off");
                 Console.WriteLine(" [E]xit application");
 
                 choice = Console.ReadLine();
@@ -468,9 +643,11 @@ namespace busTransit
                         break;
 
                     case "F":
+                        findPassenger();
                         break;
 
                     case "f":
+                        findPassenger();
                         break;
 
                     case "S":
@@ -482,19 +659,19 @@ namespace busTransit
                         break;
 
                     case "N":
-                        sort();
+                        //nudgePassenger();
                         break;
 
                     case "n":
-                        sort();
+                        //nudgePassenger();
                         break;
 
                     case "G":
-                        sort();
+                        getOff();
                         break;
 
                     case "g":
-                        sort();
+                        getOff();
                         break;
 
                     case "E":
@@ -506,11 +683,12 @@ namespace busTransit
                         break;
 
                     default:
-                        Console.WriteLine("Error, try again");
+                        Console.WriteLine("Error: Invalid characters, try again.");
                         break;
                 }
-            }
-            while (choice != "0");
+            } while (choice != "0");
+            Console.ReadKey();
+            Console.Write("Press any key to return to the menu . . . ");
         }
 
         public static void Main(string[] args)
@@ -522,7 +700,3 @@ namespace busTransit
         }
     }
 }
-
-
-
-
